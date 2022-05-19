@@ -25,11 +25,7 @@ async function run() {
 
         app.post('/list', async (req, res) => {
             const newTask = req.body;
-            const query = { name: newTask.treatment, description: newTask.date }
-            const exists = await bookingCollection.findOne(query);
-            if (exists) {
-                return res.send({ success: false, booking: exists })
-            }
+            // const query = { name: newTask.treatment, description: newTask.date }
             const result = await taskCollection.insertOne(newTask);
             return res.send({ success: true, result });
         });
