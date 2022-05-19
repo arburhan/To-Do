@@ -29,6 +29,7 @@ async function run() {
             const result = await taskCollection.insertOne(newTask);
             return res.send({ success: true, result });
         });
+        // face error
         // delete item
         app.delete('/list/:id', async (req, res) => {
             const id = req.params.id;
