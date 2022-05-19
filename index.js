@@ -15,11 +15,12 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         await client.connect();
-        const taskCollection = client.db('Todo_Task').collection('Task_List');
-        app.get('/tasklist', async (req, res) => {
-            const tasklist = await taskCollection.find().toArray();
-            res.send(tasklist);
-            console.log('mongo connect')
+        const taskCollection = client.db("Todo_Task").collection("List");
+        app.get('/list', async (req, res) => {
+            const query = {};
+            const cursor = taskCollection.find(query);
+            const taskList = await cursor.toArray();
+            res.send(taskList);
         })
 
     }
@@ -27,6 +28,7 @@ async function run() {
 
     }
 }
+run().catch(console.dir());
 
 app.get('/', (req, res) => {
     res.send('Hello task!')
