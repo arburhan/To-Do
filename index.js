@@ -22,6 +22,12 @@ async function run() {
             const taskList = await cursor.toArray();
             res.send(taskList);
         });
+        app.get('/list/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const user = await taskCollection.find(query).toArray();
+            res.send(user);
+        })
 
         app.post('/list', async (req, res) => {
             const newTask = req.body;
